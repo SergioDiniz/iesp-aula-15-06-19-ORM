@@ -1,0 +1,25 @@
+
+Requisitos:
+
+1 - Cadastro 
+	- Paceiente
+	- Medico
+	- Consulta
+2 - Agendamento
+3 - Consulta por periodo
+4 - Agendamento por periodo
+5 - Consultar pacientes
+6 - Cancelar consultas
+7 - Cancelar agendamentos
+8 - Reagendamento de consulta
+
+Regras de negócio:
+
+1 - Não pode existir dois agendamentos para o mesmo horário (dia/hora)
+2 - Não pode efetuar agendamento com data retroativa
+3 - Posso cancelar agendamento
+4 - No cadastro do médico é necessário informar os dias de atendimento (Horários disponíveis para agendamento de consulta)
+5 - Médico pode cancelar uma consulta, no ato cancealamento uma possível atendente poderá reagendar
+
+
+
