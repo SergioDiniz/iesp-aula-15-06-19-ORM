@@ -2,7 +2,6 @@ package br.com.consultemed.model;
 
 import javax.persistence.*;
 
-@Table(name = "Contato")
 @Entity
 public class Contato {
 

@@ -1,8 +1,11 @@
 package br.com.consultemed.utils;
 
 import br.com.consultemed.model.Contato;
+import br.com.consultemed.model.Medico;
+import br.com.consultemed.model.Paciente;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 
 public class Main {
 
@@ -14,8 +17,12 @@ public class Main {
 
         System.out.println("Contato criado");
 
+        Paciente paciente = new Paciente("Sergio", "159753123456", new Date());
+        Medico medico = new Medico("Sergio", "159753123456", new Date(), "1234568");
+
         factory.getTransaction().begin();
-        factory.persist(contato);
+        factory.persist(paciente);
+        factory.persist(medico);
         factory.getTransaction().commit();
         factory.close();
 

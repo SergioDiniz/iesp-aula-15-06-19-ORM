@@ -17,7 +17,17 @@ public class Endereco {
 	private String bairro;
 	private String estado;
 	private String uf;
-	
+
+	public Endereco() {	}
+
+	public Endereco(String cep, String logradouro, String bairro, String estado, String uf) {
+		this.cep = cep;
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.estado = estado;
+		this.uf = uf;
+	}
+
 	public long getId() {
 		return id;
 	}

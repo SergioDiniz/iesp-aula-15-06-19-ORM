@@ -1,17 +1,21 @@
 package br.com.consultemed.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Pessoa {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Pessoa implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String cpf;
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
     @OneToMany(mappedBy = "pessoa")
