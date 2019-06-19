@@ -1,6 +1,9 @@
 package br.com.consultemed.model;
 
+import br.com.consultemed.enums.StatusConsulta;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,17 +14,29 @@ public class Consulta {
     private Long id;
     @ManyToOne
     private Medico medico;
-    @OneToOne
+    @OneToOne(mappedBy = "consulta")
     private Agendamento agendamento;
     @OneToMany(mappedBy = "consulta")
     private List<Exame> exames;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataDaConsulta;
+    @Enumerated(EnumType.STRING)
+    private StatusConsulta status;
 
     public Consulta() { }
 
-    public Consulta(Medico medico, Agendamento agendamento, List<Exame> exames) {
+    public Consulta(Medico medico) {
+        this.medico = medico;
+    }
+
+    public Consulta(Medico medico, Agendamento agendamento) {
         this.medico = medico;
         this.agendamento = agendamento;
-        this.exames = exames;
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.status = StatusConsulta.NORMAL;
     }
 
     public Long getId() {
@@ -54,5 +69,32 @@ public class Consulta {
 
     public void setExames(List<Exame> exames) {
         this.exames = exames;
+    }
+
+    public Date getDataDaConsulta() {
+        return dataDaConsulta;
+    }
+
+    public void setDataDaConsulta(Date dataDaConsulta) {
+        this.dataDaConsulta = dataDaConsulta;
+    }
+
+    public StatusConsulta getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusConsulta status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Consulta{" +
+                "id=" + id +
+                ", medico=" + medico +
+                ", agendamento=" + agendamento +
+                ", dataDaConsulta=" + dataDaConsulta +
+                ", status=" + status +
+                '}';
     }
 }

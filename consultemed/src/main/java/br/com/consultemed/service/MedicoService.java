@@ -13,4 +13,9 @@ public class MedicoService implements IMedicoService {
     public void cadastrar(Medico medico) {
         medicoDAO.add(medico);
     }
+
+    @Override
+    public Medico buscarPorID(Long id) {
+        return medicoDAO.findById(id);
+    }
 }

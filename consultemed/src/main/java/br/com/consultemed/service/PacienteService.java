@@ -13,4 +13,9 @@ public class PacienteService implements IPacienteService {
     public void cadastrar(Paciente paciente) {
         pacienteDAO.add(paciente);
     }
+
+    @Override
+    public Paciente buscarPorID(Long id) {
+        return pacienteDAO.findById(id);
+    }
 }

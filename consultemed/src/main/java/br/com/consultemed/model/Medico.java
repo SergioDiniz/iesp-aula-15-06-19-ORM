@@ -1,7 +1,6 @@
 package br.com.consultemed.model;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
@@ -40,4 +39,16 @@ public class Medico extends Pessoa{
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
     }
+
+
+    @Override
+    public String toString() {
+        return "Medico{" +
+                "NOME='" + this.getNome() + '\'' +
+                "CPF='" + this.getCpf() + '\'' +
+                "NASCIMENTO='" + this.getDataNascimento() + '\'' +
+                "CRM='" + CRM + '\'' +
+                '}';
+    }
+
 }

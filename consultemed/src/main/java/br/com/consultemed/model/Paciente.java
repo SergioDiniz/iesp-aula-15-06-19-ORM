@@ -39,4 +39,9 @@ public class Paciente extends Pessoa {
     public void setAgendamentos(List<Agendamento> agendamentos) {
         this.agendamentos = agendamentos;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

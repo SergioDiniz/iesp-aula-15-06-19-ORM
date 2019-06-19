@@ -1,5 +1,7 @@
 package br.com.consultemed.model;
 
+import br.com.consultemed.enums.StatusConsulta;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,18 +12,29 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data;
+    private Date dataDaConsulta;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date diaDoAgentamento;
     @ManyToOne
     private Paciente paciente;
-    @OneToOne(mappedBy = "agendamento")
+    @OneToOne(cascade = CascadeType.ALL)
     private Consulta consulta;
+    @Enumerated(EnumType.STRING)
+    private StatusConsulta status;
 
     public Agendamento() { }
 
-    public Agendamento(Date data, Paciente paciente, Consulta consulta) {
-        this.data = data;
+    public Agendamento(Date dataDaConsulta, Paciente paciente, Consulta consulta) {
+        this.dataDaConsulta = dataDaConsulta;
         this.paciente = paciente;
         this.consulta = consulta;
+    }
+
+    @PrePersist
+    private void prePersist(){
+        this.diaDoAgentamento = new Date();
+        this.status = StatusConsulta.NORMAL;
+        this.consulta.setDataDaConsulta(this.dataDaConsulta);
     }
 
     public Long getId() {
@@ -32,12 +45,12 @@ public class Agendamento {
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataDaConsulta() {
+        return dataDaConsulta;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataDaConsulta(Date data) {
+        this.dataDaConsulta = data;
     }
 
     public Paciente getPaciente() {
@@ -54,5 +67,32 @@ public class Agendamento {
 
     public void setConsulta(Consulta consulta) {
         this.consulta = consulta;
+    }
+
+    public Date getDiaDoAgentamento() {
+        return diaDoAgentamento;
+    }
+
+    public void setDiaDoAgentamento(Date diaDoAgentamento) {
+        this.diaDoAgentamento = diaDoAgentamento;
+    }
+
+    public StatusConsulta getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusConsulta status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Agendamento{" +
+                "id=" + id +
+                ", dataDaConsulta=" + dataDaConsulta +
+                ", diaDoAgentamento=" + diaDoAgentamento +
+                ", paciente=" + paciente +
+                ", status=" + status +
+                '}';
     }
 }

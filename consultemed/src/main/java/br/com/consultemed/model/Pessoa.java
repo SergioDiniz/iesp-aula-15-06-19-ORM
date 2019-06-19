@@ -79,4 +79,14 @@ public class Pessoa implements Serializable {
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
     }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                '}';
+    }
 }
