@@ -75,20 +75,23 @@ public class Main {
 
 
         //6 - Cancelar consultas
-        Consulta cCancelar = cs.buscarPorID(11L);
+        System.out.println("6 - Cancelar consultas");
+        Consulta cCancelar = cs.buscarPorID(10L);
         cs.cancelar(cCancelar);
 
         //7 - Cancelar um agendamento
-        Agendamento aCancelar = as.buscarPorID(4L);
+        System.out.println("7 - Cancelar um agendamento");
+        Agendamento aCancelar = as.buscarPorID(16L);
         aCancelar.toString();
         as.cancelar(aCancelar);
 
         //8 - Reagendamento de consulta
-        Agendamento aReagendar = as.buscarPorID(6L);    
+        System.out.println("8 - Reagendamento de consulta");
+        Agendamento aReagendar = as.buscarPorID(8L);    
         aReagendar.setDiaDoAgentamento(DataUtils.stringToDate("18/07/2019"));
-        Consulta c = cs.buscarPorID(aReagendar.getConsulta().getId());
-        cs.reagendar(c);
-        as.reeagendar(aReagendar);        
+        if(!as.reeagendar(aReagendar)) {
+        	System.out.println("Consulta cancelada não pode ser agendada");
+        }        
     }
 
 }
