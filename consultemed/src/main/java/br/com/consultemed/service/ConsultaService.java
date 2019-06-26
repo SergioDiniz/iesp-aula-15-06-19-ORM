@@ -1,6 +1,7 @@
 package br.com.consultemed.service;
 
 import br.com.consultemed.dao.ConsultaDAO;
+import br.com.consultemed.enums.StatusConsulta;
 import br.com.consultemed.model.Consulta;
 import java.util.Date;
 import java.util.List;
@@ -27,5 +28,13 @@ public class ConsultaService implements IConsultaService {
         return consultaDAO.consultarPorPeriodo(inicio, fim);
     }
 
-    // Cancelar
+    public void cancelar(Consulta consulta) {
+    	consulta.setStatus(StatusConsulta.CANCELADA);
+    	consultaDAO.update(consulta);    	
+    }
+    
+    public void reagendar(Consulta consulta) {
+    	consulta.setStatus(StatusConsulta.REAGENDADA);
+    	consultaDAO.update(consulta);
+    }
 }

@@ -1,5 +1,7 @@
 package br.com.consultemed.service;
 
+import java.util.List;
+
 import br.com.consultemed.dao.PacienteDAO;
 import br.com.consultemed.model.Paciente;
 
@@ -18,4 +20,5 @@ public class PacienteService implements IPacienteService {
     public Paciente buscarPorID(Long id) {
         return pacienteDAO.findById(id);
     }
+
 }

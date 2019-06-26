@@ -1,16 +1,20 @@
 package br.com.consultemed.utils;
 
-import br.com.consultemed.dao.MedicoDAO;
-import br.com.consultemed.dao.PacienteDAO;
-import br.com.consultemed.model.*;
+import java.text.ParseException;
+import java.util.Date;
+
+import br.com.consultemed.model.Agendamento;
+import br.com.consultemed.model.Consulta;
+import br.com.consultemed.model.Contato;
+import br.com.consultemed.model.Email;
+import br.com.consultemed.model.Endereco;
+import br.com.consultemed.model.Medico;
+import br.com.consultemed.model.Paciente;
+import br.com.consultemed.model.Telefone;
 import br.com.consultemed.service.AgendamentoService;
 import br.com.consultemed.service.ConsultaService;
 import br.com.consultemed.service.MedicoService;
 import br.com.consultemed.service.PacienteService;
-
-import javax.persistence.EntityManager;
-import java.text.ParseException;
-import java.util.Date;
 
 public class Main {
 
@@ -57,11 +61,22 @@ public class Main {
                 DataUtils.stringToDate("18/06/2019"),
                 DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
 
-        // 7 - Cancelar um agendamento
-        Agendamento aCancelar = as.buscarPorID(2L);
+        //6 - Cancelar consultas
+        Consulta cCancelar = cs.buscarPorID(4L);
+        cs.cancelar(cCancelar);
+        
+        //7 - Cancelar um agendamento
+        Agendamento aCancelar = as.buscarPorID(4L);
         aCancelar.toString();
         as.cancelar(aCancelar);
-
+        
+        //8 - Reagendamento de consulta
+        Agendamento aReagendar = as.buscarPorID(5L);    
+        aReagendar.setDiaDoAgentamento(DataUtils.stringToDate("18/07/2019"));
+        Consulta c = cs.buscarPorID(aReagendar.getConsulta().getId());
+        cs.reagendar(c);
+        as.reeagendar(aReagendar);
+        
     }
 
 }

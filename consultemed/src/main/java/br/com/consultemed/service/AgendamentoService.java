@@ -1,12 +1,11 @@
 package br.com.consultemed.service;
 
+import java.util.Date;
+import java.util.List;
+
 import br.com.consultemed.dao.AgendamentoDAO;
 import br.com.consultemed.enums.StatusConsulta;
 import br.com.consultemed.model.Agendamento;
-import br.com.consultemed.utils.DataUtils;
-
-import java.util.Date;
-import java.util.List;
 
 public class AgendamentoService implements IAgendamentoService {
 
@@ -30,14 +29,13 @@ public class AgendamentoService implements IAgendamentoService {
 
 
     //Cancelar
-    public void cancelar(Agendamento agendamento) {
-    	agendamento.setStatus(StatusConsulta.CANCELADA);
-    	agendamentoDAO.update(agendamento);    	
+    public void cancelar(Agendamento agendamento) {    	
+    	agendamentoDAO.remove(agendamento);    	
     }
 
     //Reagendar
     public void reeagendar(Agendamento agendamento) {
-    	agendamento.setStatus(StatusConsulta.REAGENDADA);
+    	agendamento.setStatus(StatusConsulta.REAGENDADA);    	
     	agendamentoDAO.update(agendamento);    
     }
 
