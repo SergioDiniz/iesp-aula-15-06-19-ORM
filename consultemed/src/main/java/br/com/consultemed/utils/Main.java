@@ -62,7 +62,7 @@ public class Main {
                 DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
 
         //6 - Cancelar consultas
-        Consulta cCancelar = cs.buscarPorID(4L);
+        Consulta cCancelar = cs.buscarPorID(11L);
         cs.cancelar(cCancelar);
         
         //7 - Cancelar um agendamento
@@ -71,11 +71,11 @@ public class Main {
         as.cancelar(aCancelar);
         
         //8 - Reagendamento de consulta
-        Agendamento aReagendar = as.buscarPorID(5L);    
+        Agendamento aReagendar = as.buscarPorID(6L);    
         aReagendar.setDiaDoAgentamento(DataUtils.stringToDate("18/07/2019"));
         Consulta c = cs.buscarPorID(aReagendar.getConsulta().getId());
         cs.reagendar(c);
-        as.reeagendar(aReagendar);
+       // as.reeagendar(aReagendar);
         
     }
 
