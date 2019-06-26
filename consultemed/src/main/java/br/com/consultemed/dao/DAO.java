@@ -42,7 +42,7 @@ public class DAO<T> {
     }
 
     //listAll
-    public List<T> listAll(Long id){
+    public List<T> listAll(){
         String query = String.format("SELECT A FROM %s AS A", this.classe.getName());
         List<T> result = manager.createQuery(query).getResultList();
 
