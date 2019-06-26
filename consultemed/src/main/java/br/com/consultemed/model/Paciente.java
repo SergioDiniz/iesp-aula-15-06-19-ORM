@@ -1,5 +1,6 @@
 package br.com.consultemed.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class Paciente extends Pessoa {
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "paciente")
@@ -17,6 +18,9 @@ public class Paciente extends Pessoa {
 
 	@OneToOne
 	private Prontuario prontuario;
+
+	@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+	private List<Contato> contatos = new ArrayList<>();
 
 	public Paciente() { }
 
@@ -38,6 +42,22 @@ public class Paciente extends Pessoa {
 
     public void setAgendamentos(List<Agendamento> agendamentos) {
         this.agendamentos = agendamentos;
+    }
+
+    public Prontuario getProntuario() {
+        return prontuario;
+    }
+
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
+    }
+
+    public List<Contato> getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
     }
 
     @Override

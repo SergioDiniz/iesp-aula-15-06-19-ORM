@@ -20,6 +20,11 @@ public class Email {
 	public Email() {
 	}
 
+	public Email(String email, Pessoa pessoa) {
+		this.email = email;
+		this.pessoa = pessoa;
+	}
+
 	public long getId() {
 		return id;
 	}

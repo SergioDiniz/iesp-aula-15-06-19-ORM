@@ -2,6 +2,7 @@ package br.com.consultemed.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,11 +19,11 @@ public class Pessoa implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
-    @OneToMany(mappedBy = "pessoa")
-    private List<Email> emails;
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    private List<Email> emails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "pessoa")
-    private List<Telefone> telefones;
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    private List<Telefone> telefones = new ArrayList<>();
 
     public Pessoa() { }
 
