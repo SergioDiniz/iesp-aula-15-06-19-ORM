@@ -40,12 +40,17 @@ public class Main {
                 new Consulta(ms.buscarPorID(2l))
         ));
 
-
+        	
         //Consultar Consulta
         cs.consultarPorPeriodo(
                 DataUtils.stringToDate("18/06/2019"),
                 DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
 
+        //Cancelar um agendamento
+        Agendamento aCancelar = as.buscarPorID(2L); 
+        aCancelar.toString();        
+        as.cancelar(aCancelar);
+        
     }
 
 }

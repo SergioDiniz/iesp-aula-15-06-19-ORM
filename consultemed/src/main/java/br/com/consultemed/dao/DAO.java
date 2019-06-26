@@ -1,10 +1,10 @@
 package br.com.consultemed.dao;
 
-import br.com.consultemed.utils.JPAUtils;
-import com.sun.javafx.binding.StringFormatter;
+import java.util.List;
 
 import javax.persistence.EntityManager;
-import java.util.List;
+
+import br.com.consultemed.utils.JPAUtils;
 
 public class DAO<T> {
 
