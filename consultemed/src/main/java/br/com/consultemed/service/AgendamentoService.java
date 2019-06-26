@@ -1,10 +1,12 @@
 package br.com.consultemed.service;
 
-import java.sql.Date;
-
-import br.com.consultemed.dao.AgendamentoDAO;import br.com.consultemed.enums.StatusConsulta;
+import br.com.consultemed.dao.AgendamentoDAO;
+import br.com.consultemed.enums.StatusConsulta;
 import br.com.consultemed.model.Agendamento;
 import br.com.consultemed.utils.DataUtils;
+
+import java.util.Date;
+import java.util.List;
 
 public class AgendamentoService implements IAgendamentoService {
 
@@ -16,7 +18,7 @@ public class AgendamentoService implements IAgendamentoService {
 
     @Override
     public void cadastrar(Agendamento agendamento) {
-    	//2 - Não pode efetuar agendamento com data retroativa
+    	//2 - Nï¿½o pode efetuar agendamento com data retroativa
         agendamento.getConsulta().setAgendamento(agendamento);        
         agendamentoDAO.add(agendamento);
     }
@@ -26,7 +28,6 @@ public class AgendamentoService implements IAgendamentoService {
         return agendamentoDAO.findById(id);
     }
 
-    //Consultar por periodo
 
     //Cancelar
     public void cancelar(Agendamento agendamento) {
@@ -38,5 +39,12 @@ public class AgendamentoService implements IAgendamentoService {
     public void reeagendar(Agendamento agendamento) {
     	agendamento.setStatus(StatusConsulta.REAGENDADA);
     	agendamentoDAO.update(agendamento);    
+    }
+
+    //Consultar por periodo
+    @Override
+    public List<Agendamento> consultarPorPeriodo(Date inicio, Date fim) {
+        return agendamentoDAO.consultarPorPeriodo(inicio, fim);
+
     }
 }

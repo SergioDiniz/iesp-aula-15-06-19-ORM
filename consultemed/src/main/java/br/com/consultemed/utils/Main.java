@@ -20,7 +20,7 @@ public class Main {
         AgendamentoService as = new AgendamentoService();
         ConsultaService cs = new ConsultaService();
 
-        // Cadastro de Pasciente
+        // 1 - Cadastro de Pasciente
         Paciente p = new Paciente("Sergio", "159753123419", new Date());
         p.getContatos().add(new Contato("Bel", "bel@g.com.br", "8355555555", p));
         p.setEndereco(new Endereco("58925000", "Santa helena", "Centro", "Paraiba", "PB"));
@@ -28,34 +28,40 @@ public class Main {
         p.getTelefones().add(new Telefone("83", "88888888", p));
         ps.cadastrar(p);
 
-        // Cadastro de Medico
+        // 1 - Cadastro de Medico
         ms.cadastrar(new Medico("Sergio", "159753123457", new Date(), "1234568"));
 
-        // Cadastro Agendamento/Consulta
+        // 1 - Cadastro Agendamento/Consulta
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("15/06/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(1l),
                 new Consulta(ms.buscarPorID(2l))
         ));
 
-        // Cadastro Agendamento/Consulta
+        // 2 - Cadastro Agendamento/Consulta
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("18/06/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(1l),
                 new Consulta(ms.buscarPorID(2l))
         ));
 
-        	
-        //Consultar Consulta
+
+        // 3 - Consultar Consultas por Período
         cs.consultarPorPeriodo(
                 DataUtils.stringToDate("18/06/2019"),
                 DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
 
-        //Cancelar um agendamento
-        Agendamento aCancelar = as.buscarPorID(2L); 
-        aCancelar.toString();        
+
+        // 4 - Consultar Agendamento por Período
+        as.consultarPorPeriodo(
+                DataUtils.stringToDate("18/06/2019"),
+                DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
+
+        // 7 - Cancelar um agendamento
+        Agendamento aCancelar = as.buscarPorID(2L);
+        aCancelar.toString();
         as.cancelar(aCancelar);
-        
+
     }
 
 }

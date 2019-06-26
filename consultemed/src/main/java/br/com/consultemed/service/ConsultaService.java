@@ -22,7 +22,8 @@ public class ConsultaService implements IConsultaService {
     }
 
     // Consultar por periodo
-    public List<Consulta> consultarPorPeriodo(Date inicio, Date fim){
+    @Override
+    public List<Consulta> consultarPorPeriodo(Date inicio, Date fim) {
         return consultaDAO.consultarPorPeriodo(inicio, fim);
     }
 
