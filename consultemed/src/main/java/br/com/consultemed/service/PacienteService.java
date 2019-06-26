@@ -1,9 +1,9 @@
 package br.com.consultemed.service;
 
-import java.util.List;
-
 import br.com.consultemed.dao.PacienteDAO;
 import br.com.consultemed.model.Paciente;
+
+import java.util.Optional;
 
 public class PacienteService implements IPacienteService {
 
@@ -19,6 +19,11 @@ public class PacienteService implements IPacienteService {
     @Override
     public Paciente buscarPorID(Long id) {
         return pacienteDAO.findById(id);
+    }
+
+    @Override
+    public Optional<Paciente> consultarPaciente(String CPF) {
+        return pacienteDAO.consultarPaciente(CPF);
     }
 
 }

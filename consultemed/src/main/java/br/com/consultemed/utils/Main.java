@@ -2,6 +2,7 @@ package br.com.consultemed.utils;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Optional;
 
 import br.com.consultemed.model.Agendamento;
 import br.com.consultemed.model.Consulta;
@@ -25,6 +26,7 @@ public class Main {
         ConsultaService cs = new ConsultaService();
 
         // 1 - Cadastro de Pasciente
+        System.out.println("1 - Cadastro de Pasciente");
         Paciente p = new Paciente("Sergio", "159753123419", new Date());
         p.getContatos().add(new Contato("Bel", "bel@g.com.br", "8355555555", p));
         p.setEndereco(new Endereco("58925000", "Santa helena", "Centro", "Paraiba", "PB"));
@@ -43,6 +45,7 @@ public class Main {
         ));
 
         // 2 - Cadastro Agendamento/Consulta
+        System.out.println("2 - Cadastro Agendamento/Consulta");
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("18/06/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(1l),
@@ -51,32 +54,42 @@ public class Main {
 
 
         // 3 - Consultar Consultas por Período
+        System.out.println("3 - Consultar Consultas por Período");
         cs.consultarPorPeriodo(
                 DataUtils.stringToDate("18/06/2019"),
                 DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
 
 
         // 4 - Consultar Agendamento por Período
+        System.out.println("4 - Consultar Agendamento por Período");
         as.consultarPorPeriodo(
                 DataUtils.stringToDate("18/06/2019"),
                 DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
 
+        // 5 - Consultar Paciente
+        System.out.println("5 - Consultar Paciente");
+        Optional<Paciente> opPaci = ps.consultarPaciente("15975312341");
+        if(opPaci.isPresent()){
+            System.out.println(opPaci.get().toString());
+        }
+
+
         //6 - Cancelar consultas
         Consulta cCancelar = cs.buscarPorID(4L);
         cs.cancelar(cCancelar);
-        
+
         //7 - Cancelar um agendamento
         Agendamento aCancelar = as.buscarPorID(4L);
         aCancelar.toString();
         as.cancelar(aCancelar);
-        
+
         //8 - Reagendamento de consulta
-        Agendamento aReagendar = as.buscarPorID(5L);    
+        Agendamento aReagendar = as.buscarPorID(5L);
         aReagendar.setDiaDoAgentamento(DataUtils.stringToDate("18/07/2019"));
         Consulta c = cs.buscarPorID(aReagendar.getConsulta().getId());
         cs.reagendar(c);
         as.reeagendar(aReagendar);
-        
+
     }
 
 }
