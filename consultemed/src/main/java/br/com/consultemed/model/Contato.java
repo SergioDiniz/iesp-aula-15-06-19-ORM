@@ -12,6 +12,9 @@ public class Contato {
     private String email;
     private String telefone;
 
+    @ManyToOne
+    private Paciente paciente;
+
     public Contato() {
     }
 
@@ -19,7 +22,13 @@ public class Contato {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-        this.id = null;
+    }
+
+    public Contato(String nome, String email, String telefone, Paciente paciente) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.paciente = paciente;
     }
 
     public Long getId() {
@@ -52,5 +61,13 @@ public class Contato {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 }

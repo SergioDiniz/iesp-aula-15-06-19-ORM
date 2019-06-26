@@ -21,6 +21,12 @@ public class Telefone {
 	public Telefone() {
 	}
 
+	public Telefone(String ddd, String numero, Pessoa pessoa) {
+		this.ddd = ddd;
+		this.numero = numero;
+		this.pessoa = pessoa;
+	}
+
 	public long getId() {
 		return id;
 	}

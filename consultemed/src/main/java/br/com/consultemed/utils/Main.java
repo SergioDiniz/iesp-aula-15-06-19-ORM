@@ -21,7 +21,12 @@ public class Main {
         ConsultaService cs = new ConsultaService();
 
         // Cadastro de Pasciente
-        ps.cadastrar(new Paciente("Sergio", "159753123419", new Date()));
+        Paciente p = new Paciente("Sergio", "159753123419", new Date());
+        p.getContatos().add(new Contato("Bel", "bel@g.com.br", "8355555555", p));
+        p.setEndereco(new Endereco("58925000", "Santa helena", "Centro", "Paraiba", "PB"));
+        p.getEmails().add(new Email("sergio@g.com.br", p));
+        p.getTelefones().add(new Telefone("83", "88888888", p));
+        ps.cadastrar(p);
 
         // Cadastro de Medico
         ms.cadastrar(new Medico("Sergio", "159753123457", new Date(), "1234568"));
