@@ -81,9 +81,10 @@ public class Main {
 
         //7 - Cancelar um agendamento
         System.out.println("7 - Cancelar um agendamento");
-        Agendamento aCancelar = as.buscarPorID(16L);
-        aCancelar.toString();
+        Agendamento aCancelar = as.buscarPorID(3L);
+        System.out.println("Agendamento: " + aCancelar.getId() + " cancelado");
         as.cancelar(aCancelar);
+        
 
         //8 - Reagendamento de consulta
         System.out.println("8 - Reagendamento de consulta");

@@ -35,8 +35,9 @@ public class AgendamentoService implements IAgendamentoService {
 
 	//Reagendar
 	public boolean reeagendar(Agendamento agendamento) {
-		agendamento.setStatus(StatusConsulta.REAGENDADA);    	
-		if(agendamento.getConsulta().getStatus() == StatusConsulta.NORMAL) {
+		agendamento.setStatus(StatusConsulta.REAGENDADA);
+		agendamento.getConsulta().setStatus(StatusConsulta.REAGENDADA);
+		if(agendamento.getConsulta().getStatus() != StatusConsulta.CANCELADA) {
 			agendamento.getConsulta().setAgendamento(agendamento);
 			agendamentoDAO.update(agendamento);
 			return true;
