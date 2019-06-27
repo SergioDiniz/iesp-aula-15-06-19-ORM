@@ -69,15 +69,28 @@ public class Main {
                 ps.buscarPorID(1l),
                 new Consulta(ms.buscarPorID(2l))
         ));
-        // 2 - Cadastro Agendamento/Consulta
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("18/06/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("27/06/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(3l),
                 new Consulta(ms.buscarPorID(2l))
         ));
-        // 2 - Cadastro Agendamento/Consulta
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("18/06/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("20/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
+                ps.buscarPorID(4l),
+                new Consulta(ms.buscarPorID(2l))
+        ));
+        as.cadastrar(new Agendamento(
+                DataUtils.stringToDate("20/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
+                ps.buscarPorID(4l),
+                new Consulta(ms.buscarPorID(2l))
+        ));
+        as.cadastrar(new Agendamento(
+                DataUtils.stringToDate("20/07/2019 10:30:00", "dd/MM/yyyy hh:mm:ss"),
+                ps.buscarPorID(4l),
+                new Consulta(ms.buscarPorID(2l))
+        ));
+        as.cadastrar(new Agendamento(
+                DataUtils.stringToDate("20/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(4l),
                 new Consulta(ms.buscarPorID(2l))
         ));

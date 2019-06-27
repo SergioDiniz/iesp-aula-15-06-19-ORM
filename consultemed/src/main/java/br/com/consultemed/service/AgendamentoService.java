@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.consultemed.dao.AgendamentoDAO;
 import br.com.consultemed.enums.StatusConsulta;
+import br.com.consultemed.exception.DataAgendamentoException;
 import br.com.consultemed.model.Agendamento;
 
 public class AgendamentoService implements IAgendamentoService {
@@ -18,8 +19,20 @@ public class AgendamentoService implements IAgendamentoService {
 	@Override
 	public void cadastrar(Agendamento agendamento) {
 		//2 - N�o pode efetuar agendamento com data retroativa
-		agendamento.getConsulta().setAgendamento(agendamento);        
-		agendamentoDAO.add(agendamento);
+		try{
+
+			if(agendamento.getDataDaConsulta().after(new Date())){
+				agendamento.getConsulta().setAgendamento(agendamento);
+				agendamentoDAO.add(agendamento);
+			} else {
+				throw new DataAgendamentoException("Data de Agendamento Invalida: " + agendamento.getDataDaConsulta());
+			}
+
+		} catch (DataAgendamentoException ex){
+			ex.printStackTrace();
+		}
+
+
 	}
 
 	@Override
