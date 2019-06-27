@@ -29,8 +29,9 @@ public class AgendamentoService implements IAgendamentoService {
 
 
 	//Cancelar
-	public void cancelar(Agendamento agendamento) {    	
-		agendamentoDAO.remove(agendamento);    	
+	public void cancelar(Agendamento agendamento) {
+		agendamento.setStatus(StatusConsulta.CANCELADA);
+		agendamentoDAO.update(agendamento);
 	}
 
 	//Reagendar
