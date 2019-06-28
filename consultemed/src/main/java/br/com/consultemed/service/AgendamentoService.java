@@ -27,7 +27,7 @@ public class AgendamentoService implements IAgendamentoService {
 			agendamentoDAO.add(agendamento);
 
 		} catch (DataAgendamentoException ex){
-			ex.printStackTrace();
+			System.err.println(ex.getMessage());
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -90,7 +90,7 @@ public class AgendamentoService implements IAgendamentoService {
 			agendamentoDAO.update(agendamento);
 
 		} catch (DataAgendamentoException ex){
-			ex.printStackTrace();
+			System.err.println(ex.getMessage());
 		} catch (Exception e){
 			e.printStackTrace();
 		}

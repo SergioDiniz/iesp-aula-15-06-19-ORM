@@ -23,15 +23,17 @@ public class Main {
 
         // 1 - Cadastro de Pasciente
         System.out.println("1 - Cadastro de Pasciente");
-        Paciente p = new Paciente("Sergio", "159753123419", new Date());
+        Paciente p = new Paciente("Sergio", "159753123419", DataUtils.stringToDate("14/02/1992"));
         p.getContatos().add(new Contato("Bel", "bel@g.com.br", "8355555555", p));
         p.setEndereco(new Endereco("58925000", "Santa helena", "Centro", "Paraiba", "PB"));
         p.getEmails().add(new Email("sergio@g.com.br", p));
         p.getTelefones().add(new Telefone("83", "88888888", p));
         ps.cadastrar(p);
+        System.out.println(ps.consultarPaciente("159753123419"));
 
         // 1 - Cadastro de Medico
-        Medico medico1 = new Medico("Sergio", "159753123457", new Date(), "1234568");
+        System.out.println("1 - Cadastro de Medico");
+        Medico medico1 = new Medico("Dr House", "159753123457", DataUtils.stringToDate("14/02/1952"), "1234568");
         medico1.getDiasTrabalho().addAll( Arrays.asList(
                       new DiaTrabalho(medico1, DiasSemana.SEGUNDA)
                     , new DiaTrabalho(medico1, DiasSemana.QUINTA)
@@ -39,6 +41,7 @@ public class Main {
                 )
         );
         ms.cadastrar(medico1);
+        System.out.println(ms.consultarPaciente("159753123457"));
 
         Medico medico2 = new Medico("Arthur", "159753123520", new Date(), "1234567");
         medico2.getDiasTrabalho().addAll( Arrays.asList(
@@ -48,6 +51,7 @@ public class Main {
                 )
         );
         ms.cadastrar(medico2);
+
 
 
         // 1 - Cadastro de Pasciente
@@ -93,24 +97,28 @@ public class Main {
                 ps.buscarPorID(4l),
                 new Consulta(ms.buscarPorID(3l))
         ));
+        System.out.println(as.buscarPorID(1l));
         System.out.println("2 - Agendamento 3 - Mesmo Horario que Agendamento 1");
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("22/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
+
         System.out.println("2 - Agendamento 4 - Data e Hora valida");
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("25/07/2019 10:30:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
+        System.out.println(as.buscarPorID(3l));
         System.out.println("2 - Agendamento 5 - Data e Hora valida");
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("26/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
+        System.out.println(as.buscarPorID(4l));
         System.out.println("2 - Agendamento 6 - Dia do Medico Invalido");
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("20/07/2019 12:00:00", "dd/MM/yyyy hh:mm:ss"),
@@ -119,22 +127,22 @@ public class Main {
         ));
 
 
-        // 3 - Consultar Consultas por PerÃ­odo
+        // 3 - Consultar Consultas por Peri­odo
         System.out.println("3 - Consultar Consultas por Perí­odo");
         cs.consultarPorPeriodo(
-                DataUtils.stringToDate("18/06/2019"),
-                DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
+                DataUtils.stringToDate("18/06/2019 00:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("25/07/2019 23:59:59", "dd/MM/yyyy hh:mm:ss")).forEach(System.out::println);
 
 
-        // 4 - Consultar Agendamento por PerÃ­odo
+        // 4 - Consultar Agendamento por Peri­odo
         System.out.println("4 - Consultar Agendamento por Perí­odo");
         as.consultarPorPeriodo(
-                DataUtils.stringToDate("18/06/2019"),
-                DataUtils.stringToDate("20/06/2019")).forEach(System.out::println);
+                DataUtils.stringToDate("18/06/2019 00:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("25/07/2019 23:59:59", "dd/MM/yyyy hh:mm:ss")).forEach(System.out::println);
 
         // 5 - Consultar Paciente
         System.out.println("5 - Consultar Paciente");
-        Optional<Paciente> opPaci = ps.consultarPaciente("15975312341");
+        Optional<Paciente> opPaci = ps.consultarPaciente("159753123419");
         if(opPaci.isPresent()){
             System.out.println(opPaci.get().toString());
         }
@@ -144,16 +152,19 @@ public class Main {
         System.out.println("6 - Cancelar consultas");
         Consulta cCancelar = cs.buscarPorID(4L);
         cs.cancelar(cCancelar);
+        System.out.println(cs.buscarPorID(4l));
 
         //7 - Cancelar um agendamento
         System.out.println("7 - Cancelar um agendamento");
         Agendamento aCancelar = as.buscarPorID(3L);
         System.out.println("7 - Agendamento: " + aCancelar.getId() + " cancelado");
         as.cancelar(aCancelar);
+        System.out.println(as.buscarPorID(3l));
         //7 - Cancelar um agendamento
         Agendamento aCancelar2 = as.buscarPorID(4L);
         System.out.println("7 - Agendamento: " + aCancelar2.getId() + " cancelado");
         as.cancelar(aCancelar2);
+        System.out.println(as.buscarPorID(4l));
         
 
         //8 - Reagendamento de consulta
@@ -161,6 +172,7 @@ public class Main {
         Agendamento aReagendar = as.buscarPorID(3L);
         aReagendar.setDataDaConsulta(DataUtils.stringToDate("26/07/2019 13:00:00", "dd/MM/yyyy hh:mm:ss"));
         as.reeagendar(aReagendar);
+        System.out.println(as.buscarPorID(3l));
 
         System.out.println("2 - Agendamento 7 - Agendando em uma hora cancelada");
         as.cadastrar(new Agendamento(
@@ -168,6 +180,7 @@ public class Main {
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
+        System.out.println(as.buscarPorID(5l));
 
 
 
@@ -175,6 +188,7 @@ public class Main {
         System.out.println("\nMedico Cancela Consulta");
         Consulta consultaACancelar = cs.buscarPorID(1l);
         cs.cancelar(consultaACancelar);
+        System.out.println(cs.buscarPorID(1l));
 
         // Atendimento verifica os agendamentos que tiveram a consulta cancelada para tentar reagenda
         System.out.println("Atendimento verifica os agendamentos que tiveram a consulta cancelada para tentar reagenda");
@@ -182,6 +196,7 @@ public class Main {
         Agendamento agendamentoCC = agendamentosConsultaCancelada.get(0);
         agendamentoCC.setDataDaConsulta(DataUtils.stringToDate("25/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"));
         as.reeagendar(agendamentoCC);
+        System.out.println(as.buscarPorID(agendamentoCC.getId()));
 
 
     }
