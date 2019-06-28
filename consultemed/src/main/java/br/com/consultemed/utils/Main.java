@@ -1,18 +1,13 @@
 package br.com.consultemed.utils;
 
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.consultemed.model.Agendamento;
-import br.com.consultemed.model.Consulta;
-import br.com.consultemed.model.Contato;
-import br.com.consultemed.model.Email;
-import br.com.consultemed.model.Endereco;
-import br.com.consultemed.model.Medico;
-import br.com.consultemed.model.Paciente;
-import br.com.consultemed.model.Telefone;
+import br.com.consultemed.enums.DiasSemana;
+import br.com.consultemed.model.*;
 import br.com.consultemed.service.AgendamentoService;
 import br.com.consultemed.service.ConsultaService;
 import br.com.consultemed.service.MedicoService;
@@ -36,8 +31,23 @@ public class Main {
         ps.cadastrar(p);
 
         // 1 - Cadastro de Medico
-        ms.cadastrar(new Medico("Sergio", "159753123457", new Date(), "1234568"));
-        ms.cadastrar(new Medico("Arthur", "159753123520", new Date(), "1234568"));
+        Medico medico1 = new Medico("Sergio", "159753123457", new Date(), "1234568");
+        medico1.getDiasTrabalho().addAll( Arrays.asList(
+                      new DiaTrabalho(medico1, DiasSemana.SEGUNDA)
+                    , new DiaTrabalho(medico1, DiasSemana.QUINTA)
+                    , new DiaTrabalho(medico1, DiasSemana.SEXTA)
+                )
+        );
+        ms.cadastrar(medico1);
+
+        Medico medico2 = new Medico("Arthur", "159753123520", new Date(), "1234567");
+        medico2.getDiasTrabalho().addAll( Arrays.asList(
+                  new DiaTrabalho(medico2, DiasSemana.SEGUNDA)
+                , new DiaTrabalho(medico2, DiasSemana.TERCA)
+                , new DiaTrabalho(medico2, DiasSemana.SABADO)
+                )
+        );
+        ms.cadastrar(medico2);
 
 
         // 1 - Cadastro de Pasciente

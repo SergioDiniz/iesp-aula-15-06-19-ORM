@@ -1,7 +1,9 @@
 package br.com.consultemed.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +15,8 @@ public class Medico extends Pessoa{
     @OneToMany(mappedBy = "medico")
     private List<Consulta> consultas;
 
-    @OneToMany(mappedBy = "medico")
-    private List<DiaTrabalho> diasTrabalho;
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
+    private List<DiaTrabalho> diasTrabalho = new ArrayList<>();
 
     public Medico() {}
 
@@ -25,6 +27,12 @@ public class Medico extends Pessoa{
     public Medico(String nome, String cpf, Date dataNascimento, String CRM) {
         super(nome, cpf, dataNascimento);
         this.CRM = CRM;
+    }
+
+    public Medico(String nome, String cpf, Date dataNascimento, String CRM, List<DiaTrabalho> diasTrabalho) {
+        super(nome, cpf, dataNascimento);
+        this.CRM = CRM;
+        this.diasTrabalho = diasTrabalho;
     }
 
     public String getCRM() {

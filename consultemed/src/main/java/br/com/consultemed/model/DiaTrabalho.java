@@ -1,5 +1,7 @@
 package br.com.consultemed.model;
 
+import br.com.consultemed.enums.DiasSemana;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,14 +15,15 @@ public class DiaTrabalho {
     @ManyToOne
     private Medico medico;
 
-    @Temporal(TemporalType.DATE)
-    private Date dia;
+    @Enumerated(EnumType.STRING)
+    private DiasSemana diaSemana;
 
-    public DiaTrabalho() {    }
-
-    public DiaTrabalho(Medico medico, Date dia) {
+    public DiaTrabalho(Medico medico, DiasSemana diaSemana) {
         this.medico = medico;
-        this.dia = dia;
+        this.diaSemana = diaSemana;
+    }
+
+    public DiaTrabalho() {
     }
 
     public Long getId() {
@@ -39,20 +42,11 @@ public class DiaTrabalho {
         this.medico = medico;
     }
 
-    public Date getDia() {
-        return dia;
+    public DiasSemana getDiaSemana() {
+        return diaSemana;
     }
 
-    public void setDia(Date dia) {
-        this.dia = dia;
-    }
-
-    @Override
-    public String toString() {
-        return "DiaTrabalho{" +
-                "id=" + id +
-                ", medico=" + medico.toString() +
-                ", dia=" + dia +
-                '}';
+    public void setDiaSemana(DiasSemana diaSemana) {
+        this.diaSemana = diaSemana;
     }
 }
