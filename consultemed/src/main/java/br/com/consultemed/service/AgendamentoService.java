@@ -23,7 +23,7 @@ public class AgendamentoService implements IAgendamentoService {
 	public void cadastrar(Agendamento agendamento) {
 		//2 - N�o pode efetuar agendamento com data retroativa
 		try{
-			validarCadastro(agendamento);
+			validarAgendamento(agendamento);
 
 			agendamento.getConsulta().setAgendamento(agendamento);
 			agendamentoDAO.add(agendamento);
@@ -37,7 +37,7 @@ public class AgendamentoService implements IAgendamentoService {
 
 	}
 
-	public void validarCadastro(Agendamento agendamento){
+	public void validarAgendamento(Agendamento agendamento){
 		if(agendamento.getDataDaConsulta().before(new Date())){
 			throw new DataAgendamentoException("Data de Agendamento Invalida: " + DataUtils.formatarData(agendamento.getDataDaConsulta(), "dd/MM/yyyy hh:mm:ss"));
 		}
@@ -64,16 +64,27 @@ public class AgendamentoService implements IAgendamentoService {
 	}
 
 	//Reagendar
-	public boolean reeagendar(Agendamento agendamento) {
-		agendamento.setStatus(StatusConsulta.REAGENDADA);
-		agendamento.getConsulta().setStatus(StatusConsulta.REAGENDADA);
-		if(agendamento.getConsulta().getStatus() != StatusConsulta.CANCELADA) {
+	public void reeagendar(Agendamento agendamento) {
+
+		try{
+			agendamento.setStatus(StatusConsulta.REAGENDADA);
+			agendamento.getConsulta().setStatus(StatusConsulta.REAGENDADA);
+
+			validarAgendamento(agendamento);
+
+			if(agendamento.getConsulta().getStatus() == StatusConsulta.CANCELADA) {
+				throw new DataAgendamentoException("Consulta cancelada não pode ser agendada");
+			}
+
 			agendamento.getConsulta().setAgendamento(agendamento);
 			agendamentoDAO.update(agendamento);
-			return true;
-		}else {
-			return false;	
-		}    	  
+
+		} catch (DataAgendamentoException ex){
+			ex.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
 	}
 
 	//Consultar por periodo

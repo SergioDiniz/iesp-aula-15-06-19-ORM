@@ -141,18 +141,15 @@ public class Main {
         as.cancelar(aCancelar);
         //7 - Cancelar um agendamento
         Agendamento aCancelar2 = as.buscarPorID(4L);
-        System.out.println("Agendamento: " + aCancelar.getId() + " cancelado");
+        System.out.println("Agendamento: " + aCancelar2.getId() + " cancelado");
         as.cancelar(aCancelar2);
         
 
         //8 - Reagendamento de consulta
         System.out.println("8 - Reagendamento de consulta");
         Agendamento aReagendar = as.buscarPorID(3L);
-        aReagendar.setDiaDoAgentamento(DataUtils.stringToDate("18/07/2019"));
-        if(!as.reeagendar(aReagendar)) {
-        	System.out.println("Consulta cancelada não pode ser agendada");
-        }
-
+        aReagendar.setDataDaConsulta(DataUtils.stringToDate("20/07/2019 13:00:00", "dd/MM/yyyy hh:mm:ss"));
+        as.reeagendar(aReagendar);
 
         System.out.println("2 - Agendamento 7 - Agendando em uma hora cancelada");
         as.cadastrar(new Agendamento(
