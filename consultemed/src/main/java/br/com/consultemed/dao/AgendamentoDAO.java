@@ -44,4 +44,11 @@ public class AgendamentoDAO extends DAO<Agendamento> {
         return result;
     }
 
+    public List<Agendamento> agendamentosComConsultasCancelada(){
+        Query query = this.getManager().createQuery("SELECT A FROM Agendamento A where A.status NOT IN (br.com.consultemed.enums.StatusConsulta.CANCELADA) AND A.consulta.status = br.com.consultemed.enums.StatusConsulta.CANCELADA");
+        List<Agendamento> result = query.getResultList();
+
+        return result;
+    }
+
 }

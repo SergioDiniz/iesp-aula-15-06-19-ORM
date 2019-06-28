@@ -13,6 +13,9 @@ public class Medico extends Pessoa{
     @OneToMany(mappedBy = "medico")
     private List<Consulta> consultas;
 
+    @OneToMany(mappedBy = "medico")
+    private List<DiaTrabalho> diasTrabalho;
+
     public Medico() {}
 
     public Medico(String CRM) {
@@ -40,6 +43,13 @@ public class Medico extends Pessoa{
         this.consultas = consultas;
     }
 
+    public List<DiaTrabalho> getDiasTrabalho() {
+        return diasTrabalho;
+    }
+
+    public void setDiasTrabalho(List<DiaTrabalho> diasTrabalho) {
+        this.diasTrabalho = diasTrabalho;
+    }
 
     @Override
     public String toString() {

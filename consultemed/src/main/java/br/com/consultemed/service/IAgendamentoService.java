@@ -9,4 +9,6 @@ public interface IAgendamentoService extends ICRUDService<Agendamento> {
 
     List<Agendamento> consultarPorPeriodo(Date inicio, Date fim);
 
+    List<Agendamento> agendamentosComConsultasCancelada();
+
 }

@@ -20,4 +20,5 @@ public class ConsultaDAO extends DAO<Consulta> {
         List<Consulta> result = query.getResultList();
         return result;
     }
+
 }

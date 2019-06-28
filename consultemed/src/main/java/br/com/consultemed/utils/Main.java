@@ -2,6 +2,7 @@ package br.com.consultemed.utils;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import br.com.consultemed.model.Agendamento;
@@ -137,11 +138,11 @@ public class Main {
         //7 - Cancelar um agendamento
         System.out.println("7 - Cancelar um agendamento");
         Agendamento aCancelar = as.buscarPorID(3L);
-        System.out.println("Agendamento: " + aCancelar.getId() + " cancelado");
+        System.out.println("7 - Agendamento: " + aCancelar.getId() + " cancelado");
         as.cancelar(aCancelar);
         //7 - Cancelar um agendamento
         Agendamento aCancelar2 = as.buscarPorID(4L);
-        System.out.println("Agendamento: " + aCancelar2.getId() + " cancelado");
+        System.out.println("7 - Agendamento: " + aCancelar2.getId() + " cancelado");
         as.cancelar(aCancelar2);
         
 
@@ -157,6 +158,22 @@ public class Main {
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
+
+
+
+        // Medico Cancela consulta
+        System.out.println("\nMedico Cancela Consulta");
+        Consulta consultaACancelar = cs.buscarPorID(1l);
+        cs.cancelar(consultaACancelar);
+
+        // Atendimento verifica os agendamentos que tiveram a consulta cancelada para tentar reagenda
+        System.out.println("Atendimento verifica os agendamentos que tiveram a consulta cancelada para tentar reagenda");
+        List<Agendamento> agendamentosConsultaCancelada = as.agendamentosComConsultasCancelada();
+        Agendamento agendamentoCC = agendamentosConsultaCancelada.get(0);
+        agendamentoCC.setDataDaConsulta(DataUtils.stringToDate("25/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"));
+        as.reeagendar(agendamentoCC);
+
+
     }
 
 }

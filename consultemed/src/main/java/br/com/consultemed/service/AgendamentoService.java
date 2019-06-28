@@ -69,6 +69,7 @@ public class AgendamentoService implements IAgendamentoService {
 		try{
 			agendamento.setStatus(StatusConsulta.REAGENDADA);
 			agendamento.getConsulta().setStatus(StatusConsulta.REAGENDADA);
+			agendamento.setDiaDoAgentamento(new Date());
 
 			validarAgendamento(agendamento);
 
@@ -92,5 +93,10 @@ public class AgendamentoService implements IAgendamentoService {
 	public List<Agendamento> consultarPorPeriodo(Date inicio, Date fim) {
 		return agendamentoDAO.consultarPorPeriodo(inicio, fim);
 
+	}
+
+	@Override
+	public List<Agendamento> agendamentosComConsultasCancelada() {
+		return agendamentoDAO.agendamentosComConsultasCancelada();
 	}
 }
