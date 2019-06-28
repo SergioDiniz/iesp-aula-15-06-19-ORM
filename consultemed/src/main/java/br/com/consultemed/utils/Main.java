@@ -83,35 +83,35 @@ public class Main {
         ));
         System.out.println("2 - Agendamento 1 - Mesmo dia para paciente e medico diferentes");
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("20/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("22/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
         System.out.println("2 - Agendamento 2 - Mesmo dia para paciente e medico diferentes");
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("20/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("22/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(4l),
                 new Consulta(ms.buscarPorID(3l))
         ));
         System.out.println("2 - Agendamento 3 - Mesmo Horario que Agendamento 1");
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("20/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("22/07/2019 10:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
         System.out.println("2 - Agendamento 4 - Data e Hora valida");
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("20/07/2019 10:30:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("25/07/2019 10:30:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
         System.out.println("2 - Agendamento 5 - Data e Hora valida");
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("20/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("26/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));
-        System.out.println("2 - Agendamento 6 - Data e Hora valida");
+        System.out.println("2 - Agendamento 6 - Dia do Medico Invalido");
         as.cadastrar(new Agendamento(
                 DataUtils.stringToDate("20/07/2019 12:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
@@ -159,12 +159,12 @@ public class Main {
         //8 - Reagendamento de consulta
         System.out.println("8 - Reagendamento de consulta");
         Agendamento aReagendar = as.buscarPorID(3L);
-        aReagendar.setDataDaConsulta(DataUtils.stringToDate("20/07/2019 13:00:00", "dd/MM/yyyy hh:mm:ss"));
+        aReagendar.setDataDaConsulta(DataUtils.stringToDate("26/07/2019 13:00:00", "dd/MM/yyyy hh:mm:ss"));
         as.reeagendar(aReagendar);
 
         System.out.println("2 - Agendamento 7 - Agendando em uma hora cancelada");
         as.cadastrar(new Agendamento(
-                DataUtils.stringToDate("20/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"),
+                DataUtils.stringToDate("26/07/2019 11:00:00", "dd/MM/yyyy hh:mm:ss"),
                 ps.buscarPorID(5l),
                 new Consulta(ms.buscarPorID(2l))
         ));

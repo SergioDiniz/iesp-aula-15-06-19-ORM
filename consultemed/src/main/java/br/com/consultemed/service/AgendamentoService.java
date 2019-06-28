@@ -1,8 +1,6 @@
 package br.com.consultemed.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import br.com.consultemed.dao.AgendamentoDAO;
@@ -38,10 +36,21 @@ public class AgendamentoService implements IAgendamentoService {
 	}
 
 	public void validarAgendamento(Agendamento agendamento){
+		// Data retroativa
 		if(agendamento.getDataDaConsulta().before(new Date())){
 			throw new DataAgendamentoException("Data de Agendamento Invalida: " + DataUtils.formatarData(agendamento.getDataDaConsulta(), "dd/MM/yyyy hh:mm:ss"));
 		}
 
+		// Dia da consulta compativel com dia do medico
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(agendamento.getDataDaConsulta());
+		int dia = cal.get(Calendar.DAY_OF_WEEK);
+		Optional oDia = agendamento.getConsulta().getMedico().getDiasTrabalho().stream().filter(a -> a.getDiaSemana().dia == dia).findFirst();
+		if(!oDia.isPresent()){
+			throw new DataAgendamentoException("Data de Agendamento Invalida, Medico nao disponivel para o dia: " + DataUtils.formatarData(agendamento.getDataDaConsulta(), "dd/MM/yyyy hh:mm:ss"));
+		}
+
+		// Consulta na mesma hora
 		List<Agendamento> agendamentosMarcados = new ArrayList<>();
 		agendamentosMarcados.addAll(agendamentoDAO.consultarPorPeriodoMedico(agendamento.getDataDaConsulta(), agendamento.getDataDaConsulta(), agendamento.getConsulta().getMedico()));
 		agendamentosMarcados.addAll(agendamentoDAO.consultarPorPeriodoPasciente(agendamento.getDataDaConsulta(), agendamento.getDataDaConsulta(), agendamento.getPaciente()));
